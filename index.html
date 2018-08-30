@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,102 @@
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
-    
+    <ons-page>
+        <ons-toolbar>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-icon icon="md-mall"></ons-icon>
+                </div>
+                <div class="center">
+                    Home
+                </div>
+                <div class="right">
+                    <ons-icon icon="md-help"></ons-icon>
+                </div>
+            </ons-toolbar>
+        </ons-toolbar>
+
+        <ons-tabbar swipeable position="auto">
+            <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
+            </ons-tab>
+            <ons-tab page="tab2.html" label="Cart" icon="md-shopping-cart" active-icon="md-shopping-cart">
+            </ons-tab>
+        </ons-tabbar>
+    </ons-page>
+
+    <template id="tab1.html">
+        <ons-page id="Tab1">
+            <div align="center">
+                <ons-search-input placeholder="Search"></ons-search-input>
+
+            </div>
+            <div>
+
+                <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+                    <ons-carousel-item style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+
+                    </ons-carousel-item>
+                    <ons-carousel-item style="background-color: #373B44;">
+
+                </ons-carousel>
+            </div>
+            <div>
+                <ons-row>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-face"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-walk"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-desktop-windows"></ons-icon>
+                    </ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-camera"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-seat"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-smartphone"></ons-icon>
+                    </ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-toys"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-wrench"></ons-icon>
+                    </ons-col>
+                    <ons-col style="text-align: center;">
+                        <ons-icon icon="md-washing-machine"></ons-icon>
+                    </ons-col>
+                </ons-row>
+            </div>
+        </ons-page>
+
+
+    </template>
+
+    <template id="tab2.html">
+        <ons-page id="Tab2">
+            <p style="text-align: left;">
+                SHOPPING CART
+            </p>
+        </ons-page>
+    </template>
+    <script>
+        document.addEventListener('prechange', function (event) {
+            document.querySelector('ons-toolbar .center')
+                .innerHTML = event.tabItem.getAttribute('label');
+        });
+    </script>
+
+
 </body>
+
 </html>
