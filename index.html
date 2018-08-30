@@ -47,44 +47,111 @@
                     <ons-carousel-item style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
 
                     </ons-carousel-item>
-                    <ons-carousel-item style="background-color: #373B44;">
+                    <ons-carousel-item style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+
+                    </ons-carousel-item>
+                    <ons-carousel-item style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+
+                    </ons-carousel-item>
 
                 </ons-carousel>
+                <script>
+                    var prev = function () {
+                        var carousel = document.getElementById('carousel');
+                        carousel.prev();
+                    };
+
+                    var next = function () {
+                        var carousel = document.getElementById('carousel');
+                        carousel.next();
+                    };
+
+                    ons.ready(function () {
+                        var carousel = document.addEventListener('postchange', function (event) {
+                            console.log('Changed to ' + event.activeIndex)
+                        });
+                    });</script>
             </div>
             <div>
-                <ons-row>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-face"></ons-icon>
+                <ons-row style="height:120px" vertical-align="center">
+                    <ons-col style="background:#dd497a;">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-face"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Beauty
+                        </p>
                     </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-walk"></ons-icon>
+                    <ons-col style="background:rgb(66, 141, 16)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-walk"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Sports
+                        </p>
                     </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-desktop-windows"></ons-icon>
-                    </ons-col>
-                </ons-row>
-                <ons-row>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-camera"></ons-icon>
-                    </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-seat"></ons-icon>
-                    </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-smartphone"></ons-icon>
-                    </ons-col>
-                </ons-row>
-                <ons-row>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-toys"></ons-icon>
-                    </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-wrench"></ons-icon>
-                    </ons-col>
-                    <ons-col style="text-align: center;">
-                        <ons-icon icon="md-washing-machine"></ons-icon>
+                    <ons-col style="background:rgb(7, 70, 187)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-desktop-windows"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Computer
+                        </p>
                     </ons-col>
                 </ons-row>
+                <ons-row style="height:120px" vertical-align="center">
+                    <ons-col style="background:#e26891;">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-camera"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Camera
+                        </p>
+                    </ons-col>
+                    <ons-col style="background:rgb(81, 172, 20)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-seat"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Furniture
+                        </p>
+                    </ons-col>
+                    <ons-col style="background:rgb(36, 96, 207)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-smartphone"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Smartphone
+                        </p>
+                    </ons-col>
+                </ons-row>
+                <ons-row style="height:120px" vertical-align="center">
+                    <ons-col style="background:#f297b5;">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-toys"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Toy
+                        </p>
+                    </ons-col>
+                    <ons-col style="background:rgb(141, 201, 102)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-wrench"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Hardware
+                        </p>
+                    </ons-col>
+                    <ons-col style="background:rgb(117, 148, 207)">
+                        <p style="text-align: center; margin: 10px;">
+                            <ons-icon size="60px" icon="md-washing-machine"></ons-icon>
+                        </p>
+                        <p style="text-align: center; margin: 10px;">
+                            Appliance
+                        </p>
+                    </ons-col>
+                </ons-row>
+
             </div>
         </ons-page>
 
@@ -96,7 +163,21 @@
             <p style="text-align: left;">
                 SHOPPING CART
             </p>
+            <div>
+                <ons-list>
+                    <ons-list-item>Item A</ons-list-item>
+                    <ons-list-item>Item B</ons-list-item>
+                    <ons-list-item>Item C</ons-list-item>
+                </ons-list>
+            </div>
+            <div>
+                <section style="padding: 8px">
+
+                    <ons-button modifier="large">PROCEED TO PAY</ons-button>
+                </section>
+            </div>
         </ons-page>
+
     </template>
     <script>
         document.addEventListener('prechange', function (event) {
