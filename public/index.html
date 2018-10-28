@@ -222,8 +222,17 @@
     }
     else if (event.index == 2) {
       console.log('All product clicked');
+      var name2 = localStorage.getItem('name');
       // get data for product screen  
-      getAllProduct()
+      if (name2 == null) {
+        console.log(name2)
+        getAllProduct();
+      }
+      else {
+
+        getAllProduct(name2);
+      }
+      localStorage.clear();
     }
   });
   function getHomeData() {
