@@ -85,7 +85,7 @@
       <script id="icon_template" type="text/template">
             <ons-row style="height:120px" vertical-align="center">
             <% categories.forEach(function(category){%>
-        <ons-col onclick="fn.pushPage({'id': 'tab3.html', 'title': 'PullHook'})" style="background:#66ff99;" width="33%">
+        <ons-col onclick="changeTab('<%= category.name %>')" style="background:#66ff99;" width="33%">
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
           </p>
