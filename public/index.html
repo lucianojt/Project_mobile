@@ -56,7 +56,7 @@
       </div>
     </ons-toolbar>
 
-    <ons-tabbar swipeable position="auto" id = "tabbar">
+    <ons-tabbar swipeable position="auto" id="tabbar">
       <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
@@ -162,15 +162,27 @@
           Add New Data
         </ons-button>
       </p>
-     
       <div id="allPro"></div>
-      <ons-row>
+      <script id="allPro_template" type="text/template">
+        <ons-row>
 
-        <% allPro.forEach(function(allPro){
+          <% allPro.forEach(function(allPro){
           var item = allPro.data();
-
-          %>
-        </ons-row>
+        %>
+        <ons-col width="50%">
+            <ons-card>
+              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 60%"></center>
+                <div class="title">
+                  <%=item.title%>
+            </div>
+                <div class="content" id="Pdetail">
+                  Price: <%= item.price %>
+            </div>
+          </ons-card>
+        </ons-col>
+            <%});%>
+      </script>
+      </ons-row>
       <script>
         // Script to open and close sidebar
         function w3_open() {
@@ -278,9 +290,9 @@
       category: 'electronic'
     }
     db.collection("PRODUCTS").add(data)
-    .then(function (docRef) {
-      console.log("Document written with ID: ", docRef.id);
-    })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
       .catch(function (error) {
         console.error("Error adding document: ", error);
       });
