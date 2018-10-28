@@ -85,7 +85,7 @@
       <script id="icon_template" type="text/template">
             <ons-row style="height:120px" vertical-align="center">
             <% categories.forEach(function(category){%>
-        <ons-col onclick="changeTab('<%= category.name %>')" style="background:#66ff99;" width="33%">
+        <ons-col onclick="changeTab('<%= category.name %>')" style="background:#D1988C;" width="33%">
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
           </p>
@@ -222,15 +222,15 @@
     }
     else if (event.index == 2) {
       console.log('All product clicked');
-      var name2 = localStorage.getItem('name');
+      var name = localStorage.getItem('name');
       // get data for product screen  
-      if (name2 == null) {
-        console.log(name2)
+      if (name == null) {
+        console.log(name)
         getAllProduct();
       }
       else {
 
-        getAllProduct(name2);
+        getAllProduct(name);
       }
       localStorage.clear();
     }
@@ -282,9 +282,9 @@
       console.log(data);
     });
   }
-  function getAllProduct(name2) {
+  function getAllProduct(name) {
     // Get all product from firebase
-    if (name2 == null) {
+    if (name == null) {
       var apr = db.collection("PRODUCTS")
       apr.get().then(function (querySnapshot) {
 
@@ -296,7 +296,7 @@
     }
 
     else {
-      var apr = db.collection("PRODUCTS").where("category", "==", name2);
+      var apr = db.collection("PRODUCTS").where("category", "==", name);
       apr.get().then(function (querySnapshot) {
 
         var allPro_template = $('#allPro_template').html();
