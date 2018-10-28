@@ -284,23 +284,27 @@
   }
   function getAllProduct() {
     // Get all product from firebase
-    if(name2==null){
+    if (name2 == null) {
       var apr = db.collection("PRODUCTS")
-      apr.get().then(function (querySnapshot) { 
- 
-      var allPro_template = $('#allPro_template').html();
-      console.log(querySnapshot);
-      var html = ejs.render(allPro_template, { allPro : querySnapshot.docs });
-      $('#allPro').html(html);
-    })
-  }
+      apr.get().then(function (querySnapshot) {
 
-    allProductRef.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-    });
+        var allPro_template = $('#allPro_template').html();
+        console.log(querySnapshot);
+        var html = ejs.render(allPro_template, { allPro: querySnapshot.docs });
+        $('#allPro').html(html);
+      })
+    }
+
+    else {
+      var apr = db.collection("PRODUCTS").where("category", "==", name2);
+      apr.get().then(function (querySnapshot) {
+
+        var allPro_template = $('#allPro_template').html();
+        console.log(querySnapshot);
+        var html = ejs.render(allPro_template, { allPro: querySnapshot.docs });
+        $('#allPro').html(html);
+      })
+    }
 
   }
 
