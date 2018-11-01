@@ -9,7 +9,7 @@
         { "name" : "Funture" , "icon": "md-seat"},
         { "name" : "Smartphone" , "icon": "md-smartphone"},
         { "name" : "Toy" , "icon": "md-toys"},
-        { "name" : "Application" , "icon": "md-washing-machine"},
+        { "name" : "Appliance" , "icon": "md-washing-machine"},
         { "name" : "Hardware" , "icon": "md-wrench"}
     ]
 }

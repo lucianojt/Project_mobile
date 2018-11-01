@@ -103,7 +103,7 @@
   </template>
 
   <template id="tab2.html">
-    <ons-page id="Tab2">
+    <ons-page id="Tab2" >
       <ons-list>
         <ons-list-header>Shopping Cart</ons-list-header>
         <ons-list-item>
@@ -167,13 +167,12 @@
         <ons-row>
 
           <% allPro.forEach(function(allPro){
-          var item = allPro.data();
-        %>
+          var item = allPro.data(); %>
         <ons-col width="100%">
-            <ons-card>
-              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 50%"></center>
+            <ons-card onclick="getDetail('<%= item.title%>');">
+              <center><img src="<%=item.photo %>" alt="Onsen UI" style="width: 50%"></center>
                 <div class="title">
-                  <%=item.title%>
+                  <%= item.title%>
             </div>
                 <div class="content" id="Pdetail">
                   Price: <%= item.price %>
@@ -183,6 +182,11 @@
             <%});%>
       </script>
       </ons-row>
+
+
+
+
+
       <script>
         // Script to open and close sidebar
         function w3_open() {
@@ -197,7 +201,58 @@
 
     </ons-page>
   </template>
- 
+  <script>
+    var datadep = localStorage.getItem('getDep');
+    console.log(datadep)
+  </script>
+  <template id="detailP.html">
+      <ons-page>
+        <script>
+        var datadep = localStorage.getItem('getDep');
+        console.log(datadep)
+        </script>
+          <ons-toolbar>
+              <div class="left"><ons-back-button>Back</ons-back-button></div>
+              <div class="center">Detail</div>
+          </ons-toolbar>
+  
+         <div id="showDep"></div>
+        
+         <script id="Detailproduct_template" type="text/template">
+            <ons-card>
+                <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+                  
+                      <ons-carousel-item id="carousel1DeP" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+                      </ons-carousel-item>
+                      <ons-carousel-item id="carousel2DeP" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+                      </ons-carousel-item>
+                      <ons-carousel-item id="carousel3DeP" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+                      </ons-carousel-item>
+        
+               </ons-carousel>
+                    <% dataDep.forEach(function(dataDep){   
+                      var data = dataDep.data(); %>
+                <div class="title">
+                  <%= data.price%>
+                </div>
+                <div class="content">
+                  <div>
+                    <%= data.title %>
+                  </div>
+                  <ons-list>
+                    <ons-list-header>Bindings</ons-list-header>
+                    <ons-list-item>Vue</ons-list-item>
+                    <ons-list-item>Angular</ons-list-item>
+                    <ons-list-item>React</ons-list-item>
+                  </ons-list>
+                </div>
+                <%})%>
+              </ons-card>
+              
+         </script>
+  
+      </ons-page>
+    </template>
 
 </body>
 <script>
@@ -223,21 +278,25 @@
       getCartData();
     }
     else if (event.index == 2) {
-      console.log('All product clicked');
-      var name = localStorage.getItem('name');
-      // get data for product screen  
-      if (name == null) {
-        console.log(name)
-        getAllProduct();
-      }
-      else {
-
-        getAllProduct(name);
-      }
-      localStorage.clear();
+      console.log('All products clicked');
+      var name2 = localStorage.getItem('name');
+      var item = localStorage.getItem('items');
+      console.log('products clicked');
+      // get data for all product screen 
       console.log('Cart clicked');
       // get data for cart screen  
-      addNewData();
+
+      if (name2 == null && item == null) {
+        console.log(name2)
+        getAllProduct();
+      }
+      else if (name2 != null && item == null) {
+
+        getAllProduct(name2);
+      } else {
+
+      }
+      localStorage.clear();
     }
   });
 
@@ -324,22 +383,41 @@
   }
 
   function addNewData() {
-    console.log('functioncart');
-    console.log(dataCart);
-    document.getElementById('showDataCart').innerHTML = '';
-    dataCart.forEach(function (dataCart) {
-      var apr = db.collection("PRODUCTS").where("title", "==", dataCart);
-      apr.get().then(function (querySnapshot) {
-        console.log(querySnapshot.docs)
-        var cart_template = $('#cart_template').html();
-        var html = ejs.render(cart_template, { cartData: querySnapshot.docs });
 
-        $('#showDataCart').append(html);
+    var data = {
+      pid: 5,
+      title: 'iPhone XS Max',
+      price: 57000,
+      category: 'smartphone'
+    }
 
+    db.collection("PRODUCTS").add(data)
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
       })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
 
-    })
   }
+  function getDetail(getDep){
+localStorage.setItem("getDep",getDep)
+showDetailP();
+myNavigator.pushPage('detailP.html');
+
+}
+function showDetailP() {
+    var dataproduct = localStorage.getItem('getDep');
+    var apr = db.collection("Products").where("title", "==", dataproduct);
+    apr.get().then(function (querySnapshot) {
+      var Detailproduct_template = $('#Detailproduct_template').html();
+      var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
+      $('#showDep').html(html); 
+    })
+  
+  }
+  
+ 
 
 </script>
 
