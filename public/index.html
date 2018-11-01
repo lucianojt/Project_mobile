@@ -69,7 +69,7 @@
   <template id="tab1.html">
     <ons-page id="Tab1">
       <p style="text-align: center; margin-top: 10px;">
-        <ons-search-input placeholder="search" onchange="search(this.value)"></ons-search-input>
+        <ons-search-input placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
       </p>
       <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
         <ons-carousel-item id="carousel1" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
@@ -83,18 +83,19 @@
       <div id="icons"></div>
 
       <script id="icon_template" type="text/template">
-        <ons-row style="height:120px" vertical-align="center">  
-        <% categories.forEach(function(category){%>  
-        <ons-col style="background:#FF6600;" width="33%" onclick="changeTab('<%= category.name %>')">
+            <ons-row style="height:120px" vertical-align="center">
+            <% categories.forEach(function(category){%>
+        <ons-col onclick="changeTab('<%= category.name %>')" style="background:#D1988C;" width="33%">
           <p style="text-align: center; margin: 10px;">
-            <ons-icon size="60px" icon="<%= category.icon %>" ></ons-icon>
+            <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
           </p>
           <p style="text-align: center; margin: 10px;" id="icon1_text">
             <%= category.name %>
           </p>
         </ons-col>
+
         <%});%>
-        </ons-row>
+    </ons-row>
         </script>
 
 
@@ -102,51 +103,35 @@
   </template>
   <template id="tab2.html">
     <ons-page id="Tab2">
+      <p>
+        <h5><b>Shopping Cart</b></h5>
+      </p>
+
+      <div id="showDataCart"></div>
+
+      <script id="cart_template" type="text/template">
       <ons-list>
-        <ons-list-header>Shopping Cart</ons-list-header>
+        
+      <% cartData.forEach(function(cartData){
+          var cartData = cartData.data(); 
+        %>
         <ons-list-item>
           <div class="left">
-            <img class="list-item__thumbnail" src="images/item1.jpg">
+            <img class="list-item__thumbnail" src="<%=cartData.Photo1%>">
           </div>
           <div class="center">
-            <span class="list-item__title">Apple Watch Series 3 GPS 42mm Grey</span>
-            <span class="list-item__subtitle" style="color: blue">฿12,650.00</span>
+            <span class="list-item__title"><%=cartData.Title%></span>
+            <span class="list-item__subtitle" style="color: blue"><%=cartData.Price%></span>
           </div>
           <div class="right">
             <p style="text-align: center; margin: 10px;">
               <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
             </p>
           </div>
-        </ons-list-item>
-        <ons-list-item>
-          <div class="left">
-            <img class="list-item__thumbnail" src="images/item2.jpg">
-          </div>
-          <div class="center">
-            <span class="list-item__title">MICROLAB SPEAKER 2.1</span>
-            <span class="list-item__subtitle" style="color: blue">฿1,570.00</span>
-          </div>
-          <div class="right">
-            <p style="text-align: center; margin: 10px;">
-              <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
-            </p>
-          </div>
-        </ons-list-item>
-        <ons-list-item>
-          <div class="left">
-            <img class="list-item__thumbnail" src="images/item3.jpg">
-          </div>
-          <div class="center">
-            <span class="list-item__title">Nike Air Max 90 ดำเทาแดง เบอร์ 40</span>
-            <span class="list-item__subtitle" style="color: blue">฿2,990.00</span>
-          </div>
-          <div class="right">
-            <p style="text-align: center; margin: 10px;">
-              <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
-            </p>
-          </div>
-        </ons-list-item>
+        </ons-list-item>    
       </ons-list>
+      <%})%>
+    </script>
       <p style="text-align: center; margin: 10px;">
         <ons-button modifier="large">PROCEED TO PAY</ons-button>
       </p>
@@ -160,7 +145,7 @@
       </p>
       <hr>
 
-      <h1 class="text-center">สินค้าสุดHot</h1>
+      <h1 class="text-center"></h1>
 
       <ons-row>
         <div id="allPro"></div>
@@ -171,14 +156,14 @@
           var item = allPro.data();
 
           %>  
-          <ons-col width="100%" onclick="getDetail('<%=item.title%>')">
+          <ons-col width="100%" onclick="getDetail('<%=item.Title%>')">
             <ons-card>
-              <center><img src="<%=item.photo1%>" alt="Onsen UI" style="width: 50%"></center>
+              <center><img src="<%=item.Photo1%>" alt="Onsen UI" style="width: 50%"></center>
               <div class="title">
-               <%=item.title%>
+               <%=item.Title%>
               </div>
               <div class="content" id="Pdetail">
-                Price: <%= item.price %>
+                Price: <%= item.Price %>
               </div>
             </ons-card>
           </ons-col>
@@ -214,36 +199,27 @@
                 <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
                   <% dataDep.forEach(function(dataDep){   
                     var data = dataDep.data(); %>
-                      <ons-carousel-item id="carousel1DeP" style="background: url(' <%= data.photo[0]%>') no-repeat center; background-size: contain;">
+                      <ons-carousel-item id="carousel1DeP" style="background: url(' <%= data.Photo1%>') no-repeat center; background-size: contain;">
                       </ons-carousel-item>
-                      <ons-carousel-item id="carousel2DeP" style="background: url('<%= data.photo[1]%>') no-repeat center; background-size: contain;">
-                      </ons-carousel-item>
-                      <ons-carousel-item id="carousel3DeP" style="background: url('<%= data.photo[2]%>') no-repeat center; background-size: contain;">
-                      </ons-carousel-item>
-                      
-                      
                </ons-carousel>
-                  
-            
-                    
+ 
                 <div class="title">
-                  <%= data.price%>
+                  <%= data.Price%>
                 </div>
                 <div class="content">
                   <div>
-                    <%= data.title %>
+                    <%= data.Title %>
                   </div>
          
                 </div>
                 <p style="text-align: center; margin: 10px;">
-                  <ons-button modifier="large" onclick="addtocart('<%= data.title %>');" >Add To Cart</ons-button>
+                  <ons-button modifier="large" onclick="addtocart('<%= data.Title %>');" >Add To Cart</ons-button>
                 </p>
                 <%})%>
               </ons-card>
          </script>
     </ons-page>
   </template>
-
 </body>
 <script>
   getHomeData();
@@ -253,7 +229,7 @@
       console.log('Home clicked');
       // get data for home screen  
       getHomeData();
-    } else if (event.index == 2) {
+    } else if (event.index == 1) {
       console.log('Cart clicked');
       getData2cart()
 
@@ -293,40 +269,51 @@
     var docRef = db.collection("UI").doc("home");
     docRef.get().then(function (doc) {
       if (doc.exists) {
-
-        //display data
+        // Display data
         console.log("Document data:", doc.data());
         var data = doc.data();
         $('#appname').html(data.appname);
-        var style = "background: url('" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+
+        var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+
         $('#carousel1').attr('style', style)
         var icon_template = $('#icon_template').html();
         var html = ejs.render(icon_template, { categories: data.categories });
         $('#icons').html(html);
-
       } else {
-
+        // doc.data() will be undefined in this case
         console.log("No such document!");
       }
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
+
+
+    // $.getJSON('home.json', function (data) {
+    //  console.log(data);
+    //  $('#appname').html(data.appname);
+    //  var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+    //  $('#carousel1').attr('style', style)
+    //  var icon_template = $('#icon_template').html();
+    //  var html = ejs.render(icon_template, { categories: data.categories });
+    // $('#icons').html(html);
+    // });
   }
 
-  function showDetailP() {
+function showDetailP() {
     var dataproduct = localStorage.getItem('getDep');
-    var apr = db.collection("Products").where("title", "==", dataproduct);
+    var apr = db.collection("Product").where("Title", "==", dataproduct);
     apr.get().then(function (querySnapshot) {
       var Detailproduct_template = $('#Detailproduct_template').html();
       var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
-      $('#showDep').html(html);
+      $('#showDep').html(html); 
     })
-
+  
   }
-  function getAllProduct(name2, item) {
+  function getAllProduct(name) {
     // Get all product from firebase
     if (name == null) {
-      var apr = db.collection("PRODUCTS")
+      var apr = db.collection("Product")
       apr.get().then(function (querySnapshot) {
 
         var allPro_template = $('#allPro_template').html();
@@ -337,7 +324,7 @@
     }
 
     else {
-      var apr = db.collection("PRODUCTS").where("category", "==", name);
+      var apr = db.collection("Product").where("Category", "==", name);
       apr.get().then(function (querySnapshot) {
 
         var allPro_template = $('#allPro_template').html();
@@ -352,12 +339,12 @@
 
     var data = {
       pid: 5,
-      title: 'iPhone XS Max',
+      title: 'iPhone',
       price: 57000,
       category: 'smartphone'
     }
 
-    db.collection("PRODUCTS").add(data)
+    db.collection("Product").add(data)
       .then(function (docRef) {
         console.log("Document written with ID: ", docRef.id);
       })
@@ -370,14 +357,13 @@
     localStorage.setItem("getDep", getDep)
     showDetailP();
     myNavigator.pushPage('detailP.html');
-
   }
   // search //
   function search(search) {
 
     const filterItems = (needle, heystack) => {
       let query = needle.toLowerCase();
-      return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
+      return heystack.filter(item => item.data().Title.toLowerCase().indexOf(needle) >= 0);
     }
     console.log("Aleray", filterItems(search, data));
     var item = filterItems(search, data);
@@ -396,7 +382,7 @@
   const data = []
   function tatol() {
     console.log(search);
-    db.collection("PRODUCTS").get()
+    db.collection("Product").get()
       .then(function (querySnapshot) {
 
         querySnapshot.docs.forEach(function (item) {
@@ -418,7 +404,35 @@
 
   }
 
+  var dataCart = [];
+  function addtocart(add2cart) {
+    localStorage.clear('quentinTarantino');
+    localStorage.setItem('quentinTarantino', add2cart);
+    var retrievedData = localStorage.getItem("quentinTarantino");
+    console.log(retrievedData);
+    dataCart.push(retrievedData);
+    alert(dataCart);
+  }
 
+
+
+  function getData2cart() {
+    console.log('functioncart');
+    console.log(dataCart);
+    document.getElementById('showDataCart').innerHTML = '';
+    dataCart.forEach(function (dataCart) {
+      var apr = db.collection("Product").where("Title", "==", dataCart);
+      apr.get().then(function (querySnapshot) {
+        console.log(querySnapshot.docs)
+        var cart_template = $('#cart_template').html();
+        var html = ejs.render(cart_template, { cartData: querySnapshot.docs });
+
+        $('#showDataCart').append(html);
+
+      })
+
+    })
+  }
 
 
 </script>
