@@ -167,7 +167,7 @@
       <h1 class="text-center"></h1>
 
       <ons-row>
-        <div id="allPro"></div>
+        <div id="AllPro"></div>
 
 
         <script id="allPro_template" type="text/template"> 
@@ -175,7 +175,7 @@
           var item = allPro.data();
 
           %>  
-          <ons-col width="100%" onclick="getDetail('<%=item.Title%>')">
+          <ons-col width="100%" onclick="Getdetail('<%=item.Title%>')">
             <ons-card style="background:#F5DEB3;">
               <center><img src="<%=item.Photo1%>" alt="Onsen UI" style="width: 50%"></center>
               <div class="title" style="color:red">
@@ -200,7 +200,7 @@
     var datadep = localStorage.getItem('getDep');
     console.log(datadep)
   </script>
-  <template id="detailP.html">
+  <template id="Detail.html">
     <ons-page>
 
       <ons-toolbar>
@@ -218,11 +218,11 @@
                     <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;" style="background:#66FF00;">
                       <% dataDep.forEach(function(dataDep){   
                         var data = dataDep.data(); %>
-                          <ons-carousel-item id="carousel1DeP" style="background: url(' <%= data.Photo1%>') no-repeat center; background-size: contain;">
+                          <ons-carousel-item id="carousel1" style="background: url('<%= data.Photo1%>') no-repeat center; background-size: contain;">
                           </ons-carousel-item>
-                          <ons-carousel-item id="carousel2DeP" style="background: url('<%= data.Photo2%>') no-repeat center; background-size: contain;">
+                          <ons-carousel-item id="carousel2" style="background: url('<%= data.Photo2%>') no-repeat center; background-size: contain;">
                           </ons-carousel-item>
-                          <ons-carousel-item id="carousel3DeP" style="background: url('<%= data.Photo3%>') no-repeat center; background-size: contain;">
+                          <ons-carousel-item id="carousel3" style="background: url('<%= data.Photo3%>') no-repeat center; background-size: contain;">
                           </ons-carousel-item>
                           
                           
@@ -346,7 +346,7 @@
         var allPro_template = $('#allPro_template').html();
         console.log(querySnapshot);
         var html = ejs.render(allPro_template, { allPro: querySnapshot.docs });
-        $('#allPro').html(html);
+        $('#AllPro').html(html);
       })
     }
 
@@ -357,7 +357,7 @@
         var allPro_template = $('#allPro_template').html();
         console.log(querySnapshot);
         var html = ejs.render(allPro_template, { allPro: querySnapshot.docs });
-        $('#allPro').html(html);
+        $('#AllPro').html(html);
       })
     }
 
@@ -380,10 +380,10 @@
       });
 
   }
-  function getDetail(getDep) {
+  function Getdetail(getDep) {
     localStorage.setItem("getDep", getDep)
     showDetailP();
-    myNavigator.pushPage('detailP.html');
+    myNavigator.pushPage('Detail.html');
   }
   // search //
   function search(search) {
@@ -427,7 +427,7 @@
     console.log('tset', title);
     var allPro_template = $('#allPro_template').html();
     var html = ejs.render(allPro_template, { allPro: title });
-    $('#allPro').html(html);
+    $('#AllPro').html(html);
 
   }
 
