@@ -372,19 +372,51 @@
     myNavigator.pushPage('detailP.html');
 
   }
+  // search //
+  function search(search) {
+
+    const filterItems = (needle, heystack) => {
+      let query = needle.toLowerCase();
+      return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
+    }
+    console.log("Aleray", filterItems(search, data));
+    var item = filterItems(search, data);
+    console.log("Aleray", item)
+    localStorage.setItem('items', item);
 
 
-  var dataCart = [];
-  function addtocart(add2cart) {
-    localStorage.clear('quentinTarantino');
-    localStorage.setItem('quentinTarantino', add2cart);
-    var retrievedData = localStorage.getItem("quentinTarantino");
-    console.log(retrievedData);
-    dataCart.push(retrievedData);
-    alert(dataCart);
+    console.log('search', item);
+
+    test(item);
+
+    document.getElementById('tabbar').setActiveTab(2);
+    // localStorage.setItem('title', item);
   }
 
+  const data = []
+  function tatol() {
+    console.log(search);
+    db.collection("PRODUCTS").get()
+      .then(function (querySnapshot) {
 
+        querySnapshot.docs.forEach(function (item) {
+          data.push(item)
+          console.log(data)
+        });
+
+      })
+    // const fruits = data[1];
+  }
+
+  function test(title) {
+    console.log("GET KAAAA", title);
+
+    console.log('tset', title);
+    var allPro_template = $('#allPro_template').html();
+    var html = ejs.render(allPro_template, { allPro: title });
+    $('#allPro').html(html);
+
+  }
 
 
 
