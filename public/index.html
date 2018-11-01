@@ -36,7 +36,7 @@
       padding-left: 5px;
       padding-bottom: 5px;
       padding-right: 5px;
-      color: rgb(1, 80, 14);
+      color: rgb(149,210, 215);
     }
 
     .button {
@@ -63,7 +63,7 @@
 <body>
   <ons-navigator swipeable id="myNavigator">
     <ons-page>
-      <ons-toolbar style="background:#95D2D7;">
+      <ons-toolbar style="background:#3C7378;">
         <div class="left">
           <ons-icon class="toolbaricon" size="30px" icon="fa-shopping-bag">
           </ons-icon>
@@ -250,7 +250,7 @@
 </body>
 <script>
   getHomeData();
-  tatol();
+  total();
   document.addEventListener('prechange', function (event) {
     if (event.index == 0) {
       console.log('Home clicked');
@@ -407,7 +407,7 @@
   }
 
   const data = []
-  function tatol() {
+  function total() {
     console.log(search);
     db.collection("Product").get()
       .then(function (querySnapshot) {
@@ -418,7 +418,6 @@
         });
 
       })
-    // const fruits = data[1];
   }
 
   function test(title) {
