@@ -43,6 +43,7 @@
 
 
 <body>
+    <ons-navigator swipeable id="myNavigator">
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -65,7 +66,7 @@
       </ons-tab>
     </ons-tabbar>
   </ons-page>
-
+</ons-navigator>
   <template id="tab1.html">
     <ons-page id="Tab1">
       <p style="text-align: center; margin-top: 10px;">
@@ -181,45 +182,51 @@
     var datadep = localStorage.getItem('getDep');
     console.log(datadep)
   </script>
-  <template id="detailP.html">
-    <ons-page>
-
-      <ons-toolbar>
-        <div class="left">
-          <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center">Detail</div>
-      </ons-toolbar>
-
-      <div id="showDep"></div>
-
-      <script id="Detailproduct_template" type="text/template">
-            <ons-card>
-               
-                <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
-                  <% dataDep.forEach(function(dataDep){   
-                    var data = dataDep.data(); %>
-                      <ons-carousel-item id="carousel1DeP" style="background: url(' <%= data.Photo1%>') no-repeat center; background-size: contain;">
-                      </ons-carousel-item>
-               </ons-carousel>
- 
-                <div class="title">
-                  <%= data.Price%>
-                </div>
-                <div class="content">
-                  <div>
-                    <%= data.Title %>
-                  </div>
-         
-                </div>
-                <p style="text-align: center; margin: 10px;">
-                  <ons-button modifier="large" onclick="addtocart('<%= data.Title %>');" >Add To Cart</ons-button>
-                </p>
-                <%})%>
-              </ons-card>
-         </script>
-    </ons-page>
-  </template>
+        <template id="detailP.html">
+          <ons-page>
+          
+              <ons-toolbar>
+                  <div class="left"><ons-back-button>Back</ons-back-button></div>
+                  <div class="center">Detail</div>
+              </ons-toolbar>
+      
+             <div id="showDep"></div>
+            
+             <script id="Detailproduct_template" type="text/template">
+                <ons-card>
+                   
+                    <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;" style="background:#66FF00;">
+                      <% dataDep.forEach(function(dataDep){   
+                        var data = dataDep.data(); %>
+                          <ons-carousel-item id="carousel1DeP" style="background: url(' <%= data.Photo1%>') no-repeat center; background-size: contain;">
+                          </ons-carousel-item>
+                          <ons-carousel-item id="carousel2DeP" style="background: url('<%= data.Photo2%>') no-repeat center; background-size: contain;">
+                          </ons-carousel-item>
+                          <ons-carousel-item id="carousel3DeP" style="background: url('<%= data.Photo3%>') no-repeat center; background-size: contain;">
+                          </ons-carousel-item>
+                          
+                          
+                   </ons-carousel>
+                      
+                
+                        
+                    <div class="Title">
+                      <%= data.Price%>
+                    </div>
+                    <div class="content">
+                      <div>
+                        <%= data.Title %>
+                      </div>
+             
+                    </div>
+                    <p style="text-align: center; margin: 10px;">
+                      <ons-button modifier="large" onclick="addtocart('<%= data.Title %>');" >Add To Cart</ons-button>
+                    </p>
+                    <%})%>
+                  </ons-card>
+             </script>
+          </ons-page>
+        </template>
 </body>
 <script>
   getHomeData();
@@ -300,15 +307,15 @@
     // });
   }
 
-function showDetailP() {
+  function showDetailP() {
     var dataproduct = localStorage.getItem('getDep');
     var apr = db.collection("Product").where("Title", "==", dataproduct);
     apr.get().then(function (querySnapshot) {
       var Detailproduct_template = $('#Detailproduct_template').html();
       var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
-      $('#showDep').html(html); 
+      $('#showDep').html(html);
     })
-  
+
   }
   function getAllProduct(name) {
     // Get all product from firebase
